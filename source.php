@@ -1,5 +1,6 @@
 <?php
 session_start();
+echo "<form>";
 /*
 
 if the first letter is a:
@@ -21,7 +22,7 @@ array ($masterlist =  ['CA', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C1
                        'DA', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'DJ', 'DK', 'DQ',
                        'SA', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10', 'SJ', 'SK', 'SQ']);
 
-
+/*
 if (isset($_SESSION)){
     if (!isset($_SESSION ['shuffledDeck'])) {
         shuffle($masterlist);
@@ -30,11 +31,22 @@ if (isset($_SESSION)){
         var_dump( $_SESSION['shuffledDeck']);
     }
 }
+*/
 
+?>
+
+<input type="submit" value = "Shuffle" name = "Shuffle">
+<?php
 
 $shuffled = array([]);
 
+if (isset($_GET['Shuffle'])){
+    shuffle ($masterlist);
+    $_SESSION['shuffledDeck'] = ($masterlist);
+    var_dump($_SESSION['shuffledDeck']);
+}
 
+echo "</form>";
 #var_dump ($masterlist);
 
 
