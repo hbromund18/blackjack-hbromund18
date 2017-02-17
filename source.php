@@ -23,29 +23,59 @@ array ($masterlist =  ['CA', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C1
                        'SA', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10', 'SJ', 'SK', 'SQ']);
 
 /*
-if (isset($_SESSION)){
-    if (!isset($_SESSION ['shuffledDeck'])) {
+if (isset($_SESSION['shuffledDeck'])){
+    if (isset($_GET['Shuffle'])) {
         shuffle($masterlist);
+        $_SESSION['shuffledDeck'] = ($masterlist);
     }
     else {
-        var_dump( $_SESSION['shuffledDeck']);
+
     }
 }
-*/
 
+*/
 ?>
 
-<input type="submit" value = "Shuffle" name = "Shuffle">
+<input type="submit" value = "Shuffle" name = "action">
+
+<input type="submit" value = "Start" name = "action">
+
+<input type="submit" value = "Hit" name = "action">
+
+<input type="submit" vaule = "Pass" name = "action">
 <?php
 
 $shuffled = array([]);
 
-if (isset($_GET['Shuffle'])){
-    shuffle ($masterlist);
-    $_SESSION['shuffledDeck'] = ($masterlist);
-    var_dump($_SESSION['shuffledDeck']);
+if (isset($_GET['action'])){
+    switch($_GET['action']){
+        case 'Shuffle':
+            shuffle($masterlist);
+            $_SESSION['shuffledDeck'] = ($masterlist);
+            break;
+        case 'Start':
+
+            break;
+    }
 }
 
+
+
+
+
+
+/*
+if (isset($_GET)){
+    if (!isset($_SESSION['shuffledDeck'])) {
+        shuffle($masterlist);
+        $_SESSION['shuffledDeck'] = ($masterlist);
+    }
+    else{
+
+    }
+}
+*/
+var_dump($_SESSION['shuffledDeck']);
 echo "</form>";
 #var_dump ($masterlist);
 
