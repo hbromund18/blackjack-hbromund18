@@ -36,13 +36,33 @@ if (isset($_SESSION['shuffledDeck'])){
 */
 ?>
 
-<input type="submit" value = "Shuffle" name = "action">
+    </br >
 
-<input type="submit" value = "Start" name = "action">
+Welcome to BlackJack, press start to begin a new game.
+    </br >
 
-<input type="submit" value = "Hit" name = "action">
+    </br >
 
-<input type="submit" vaule = "Pass" name = "action">
+    </br >
+
+    <input type="submit" value = "Start" name = "action">
+
+    &nbsp &nbsp &nbsp &nbsp
+
+    <input type="submit" value = "Shuffle" name = "action">
+
+    &nbsp &nbsp &nbsp &nbsp
+
+    <input type="submit" value = "Hit" name = "action">
+
+    &nbsp &nbsp &nbsp &nbsp
+
+    <input type="submit" vaule = "Pass" name = "action">
+
+    </br >
+
+    </br >
+
 <?php
 
 $shuffled = array([]);
@@ -54,13 +74,88 @@ if (isset($_GET['action'])){
             $_SESSION['shuffledDeck'] = ($masterlist);
             break;
         case 'Start':
+            $_SESSION['dealNumber'] = 0;
+            $_SESSION['shuffledDeck'] = $masterlist;
+            $_SESSION['playerHand'] = [];
+            shuffle($_SESSION['shuffledDeck']);
 
+            ?> Your two starting cards are: &nbsp<?php
+            $card1 = DEAL();
+            echo (cardText($card1));
+            ?> &nbsp <?php
+            echo DEAL();
+            #var_dump ($_SESSION['playerHand']);
             break;
+        case 'Hit':
+
     }
 }
+function cardText($card){
+    $output = "";
+    if ($card[1] == "A"){
+        $output = $output. "The ace of ";
+    }
+    if ($card[1] == "2"){
+        $output = $output. "The two of";
+    }
+    if ($card[1] == "3"){
+        $output = $output. "The three of";
+    }
+    if ($card[1] == "4"){
+        $output = $output. "The four of";
+    }
+    if ($card[1] == "5"){
+        $output = $output. "The five of";
+    }
+    if ($card[1] == "6"){
+        $output = $output. "The six of";
+    }
+    if ($card[1] == "7"){
+        $output = $output. "The seven of";
+    }
+    if ($card[1] == "8"){
+        $output = $output. "The eight of";
+    }
+    if ($card[1] == "9"){
+        $output = $output. "The nine of";
+    }
+    if ($card[1] == "10"){
+        $output = $output. "The ten of";
+    }
+    if ($card[1] == "J"){
+        $output = $output. "The Jack of";
+    }
+    if ($card[1] == "Q"){
+        $output = $output. "The Queen of";
+    }
+    if ($card[1] == "K"){
+        $output = $output. "The King of";
+    }
+    if ($card[0] == "D"){
+        $output = $output. " Diamonds";
+    }
+    if ($card[0] == "C"){
+        $output = $output. " Clubs";
+    }
+    if ($card[0] == "H"){
+        $output = $output. " Hearts";
+    }
+    if ($card[0] == "S"){
+        $output = $output. " Spades";
+    }
+    return $output;
+}
 
-
-
+function DEAL (){
+    #echo $_SESSION['playerHand'];
+    $intermediate = $_SESSION['shuffledDeck'];
+    $test = $_SESSION['playerHand'];
+    #echo ($intermediate[$_SESSION['dealNumber']]);
+    #var_dump($intermediate);
+    #$_SESSION['playerHand'] = array_Push($test, $intermediate[$_SESSION['dealNumber']]);
+    $_SESSION['dealNumber']++;
+    return ($intermediate[$_SESSION['dealNumber']]);
+}
 
 
 
@@ -74,10 +169,10 @@ if (isset($_GET)){
 
     }
 }
-*/
+
 var_dump($_SESSION['shuffledDeck']);
 echo "</form>";
 #var_dump ($masterlist);
 
-
+*/
 
