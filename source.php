@@ -53,11 +53,11 @@ Welcome to BlackJack, press start to begin a new game.
 
     &nbsp &nbsp &nbsp &nbsp
 
-    <input type="submit" value = "Hit" name = "action">
 
-    &nbsp &nbsp &nbsp &nbsp
 
-    <input type="submit" vaule = "Pass" name = "action">
+
+
+
 
     </br >
 
@@ -81,46 +81,74 @@ if (isset($_GET['action'])){
 
             ?> Your two starting cards are: &nbsp<?php
             $card1 = DEAL();
-            echo (cardText($card1));
+            echo cardText($card1);
+            array_push($_SESSION['playerHand'], $card1);
             ?> &nbsp <?php
-            echo DEAL();
+            $card1 = DEAL();
+            echo cardText($card1);
+            array_push($_SESSION['playerHand'], $card1);
             #var_dump ($_SESSION['playerHand']);
+            echo "</br >";
+            echo "</br >";
+            $_SESSION['dealerHand'] = [];
+            echo "The dealers revealed card is: ";
+            $card1 = DEAL();
+            echo cardText($card1);
+            array_push($_SESSION['dealerHand'], $card1);
+            $card1 = DEAL();
+            array_push($_SESSION['dealerHand'], $card1);
+            echo "</br >";
+            echo "</br >";
+            echo "Would you like to Hit or pass?";
+            ?>
+            </br >
+
+            </br >
+
+            <input type="submit" value = "Hit" name = "action">
+            &nbsp &nbsp &nbsp &nbsp
+            <input type="submit" vaule = "Pass" name = "action">
+
+            </br >
+            <?php
+            var_dump($_SESSION);
             break;
         case 'Hit':
 
     }
 }
 function cardText($card){
+    #echo $card;
     $output = "";
     if ($card[1] == "A"){
-        $output = $output. "The ace of ";
+        $output = $output. "The Ace of ";
     }
     if ($card[1] == "2"){
-        $output = $output. "The two of";
+        $output = $output. "The Two of";
     }
     if ($card[1] == "3"){
-        $output = $output. "The three of";
+        $output = $output. "The Three of";
     }
     if ($card[1] == "4"){
-        $output = $output. "The four of";
+        $output = $output. "The Four of";
     }
     if ($card[1] == "5"){
-        $output = $output. "The five of";
+        $output = $output. "The Five of";
     }
     if ($card[1] == "6"){
-        $output = $output. "The six of";
+        $output = $output. "The Six of";
     }
     if ($card[1] == "7"){
-        $output = $output. "The seven of";
+        $output = $output. "The Seven of";
     }
     if ($card[1] == "8"){
-        $output = $output. "The eight of";
+        $output = $output. "The Eight of";
     }
     if ($card[1] == "9"){
-        $output = $output. "The nine of";
+        $output = $output. "The Nine of";
     }
-    if ($card[1] == "10"){
-        $output = $output. "The ten of";
+    if ($card[1] == "1"){
+        $output = $output. "The Ten of";
     }
     if ($card[1] == "J"){
         $output = $output. "The Jack of";
