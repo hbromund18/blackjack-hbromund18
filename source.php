@@ -43,6 +43,22 @@ Welcome to BlackJack, press start to begin a new game.
 
     </br >
 
+If the page is refreshed while playing the game, all data will be lost.
+
+    </br >
+
+    </br >
+
+Press the start button at any time to create a new game.
+
+    </br >
+
+    </br >
+
+<i> The first ace in your hand will be counted as 11, and any ace after will be counted as 1 </i>
+
+    </br >
+
     </br >
 
     <input type="submit" value = "Start" name = "action">
@@ -52,6 +68,8 @@ Welcome to BlackJack, press start to begin a new game.
     </br >
 
     </br >
+
+
 
 <?php
 
@@ -97,7 +115,9 @@ if (isset($_GET['action'])){
             </br >
 
             <input type="submit" value = "Hit" name = "action">
+
             &nbsp &nbsp &nbsp &nbsp
+
             <input type="submit" value = "Pass" name = "action">
 
             </br >
@@ -210,33 +230,93 @@ if (isset($_GET['action'])){
                 $playerhandvalue = handValue($_SESSION['playerHand']);
                 if ($playerhandvalue < 21) {
                     echo "</br > </br >";
-                    echo "Congratulations you have won the Game";
+                    echo "Congratulations you have won the Game. Please press START to begin a new game.";
+                    ?>
+
+                    </br >
+                    </br >
+
+                    <input type="submit" value = "Start" name = "action">
+
+                    &nbsp &nbsp &nbsp &nbsp
+
+                    <?php
                 }
                 else if (handValue($_SESSION['playerHand']) > 21){
                     echo "</br > </br >";
-                    echo "The Game is a Draw";
+                    echo "The Game is a Draw. Please press START to begin a new game.";
+                    ?>
+
+                    </br >
+                    </br >
+
+                    <input type="submit" value = "Start" name = "action">
+
+                    &nbsp &nbsp &nbsp &nbsp
+
+                    <?php
                 }
             }
             if (handValue($_SESSION['dealerHand']) < 21){
                 $playerhandvalue = handValue($_SESSION['playerHand']);
-                if ($playerhandvalue < 21) {
+                if ($playerhandvalue <= 21) {
                     $playerValue = (21 - handValue($_SESSION['playerHand']));
                     $dealerValue = (21 - handValue($_SESSION['dealerHand']));
                     if ($playerValue < $dealerValue){
                         echo "</br > </br >";
-                        echo "Congratulations you have won the Game";
+                        echo "Congratulations you have won the Game. Please press START to begin a new game.";
+                        ?>
+
+                        </br >
+                        </br >
+
+                        <input type="submit" value = "Start" name = "action">
+
+                        &nbsp &nbsp &nbsp &nbsp
+
+                        <?php
                     }
                     else if ($playerValue == $dealerValue){
                         echo "</br > </br >";
-                        echo "The Game is a Draw";
+                        echo "The Game is a Draw. Please press START to begin a new game.";
+                        ?>
+
+                        </br >
+                        </br >
+
+                        <input type="submit" value = "Start" name = "action">
+
+                        &nbsp &nbsp &nbsp &nbsp
+
+                        <?php
                     }
                     else{
                         echo "</br > </br >";
-                        echo "The Dealer has won the game";
+                        echo "The Dealer has won the game. Please press START to begin a new game.";
+                        ?>
+
+                        </br >
+                        </br >
+
+                        <input type="submit" value = "Start" name = "action">
+
+                        &nbsp &nbsp &nbsp &nbsp
+
+                        <?php
                     }
                 }
-                if (handValue($_SESSION['playerHand']) > 21){
-                    echo "The Dealer has won the game.";
+                if ($playerhandvalue > 21){
+                    echo "The Dealer has won the game. Please press START to begin a new game.";
+                    ?>
+
+                    </br >
+                    </br >
+
+                    <input type="submit" value = "Start" name = "action">
+
+                    &nbsp &nbsp &nbsp &nbsp
+
+                    <?php
                 }
             }
             break;
