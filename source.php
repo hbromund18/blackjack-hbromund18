@@ -205,8 +205,26 @@ if (isset($_GET['action'])){
                 }
             }
             if (handValue($_SESSION['dealerHand']) > 21){
-                if (handVAlue($_SESSION['playerHand'] < 21)){
+                if (handValue($_SESSION['playerHand'] < 21)){
                     echo "Congratulations you have won the Game";
+                }
+                if (handValue($_SESSION['playerHand']) > 21){
+                    echo "The Game is a Draw";
+                }
+            }
+            if (handValue($_SESSION['dealerHand']) < 21){
+                if (handValue($_SESSION['playerHand'] < 21)){
+                    $playerValue = (21 - handValue($_SESSION['playerHand']));
+                    $dealerValue = (21 - handValue($_SESSION['dealerHand']));
+                    if ($playerValue < $dealerValue){
+                        echo "Congratulations you have won the Game";
+                    }
+                    else{
+                        echo "The Dealer has won the game";
+                    }
+                }
+                if (handValue($_SESSION['playerHand']) > 21){
+                    echo "The Dealer has won the game.";
                 }
             }
     }
