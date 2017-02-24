@@ -77,6 +77,7 @@ if (isset($_GET['action'])){
             $_SESSION['dealNumber'] = 0;
             $_SESSION['shuffledDeck'] = $masterlist;
             $_SESSION['playerHand'] = [];
+            $_SESSION['playerHandValue'] = 0;
             shuffle($_SESSION['shuffledDeck']);
 
             ?> Your two starting cards are: &nbsp<?php
@@ -116,19 +117,60 @@ if (isset($_GET['action'])){
         case 'Hit':
             echo "Your new hand is:  ";
             $card1 = DEAL();
-            echo (cardText($card1));
-            ?> &nbsp &nbsp <?php
             array_push($_SESSION['playerHand'], $card1);
-            $intermediate = $_SESSION['playerHand'];
-            echo (cardText($intermediate[0]));
-            ?> &nbsp &nbsp <?php
-            echo (cardText($intermediate[1]));
+            for ($x = 0; $x < count($_SESSION['playerHand']); $x++){
+                $intermediate = $_SESSION['playerHand'];
+                echo cardText($intermediate[$x]);
+                echo "&nbsp &nbsp &nbsp";
+            }
             echo "</br >";
-            var_dump($_SESSION);
+            #var_dump($_SESSION);
+            $_SESSION['playerHandValue'] = handValue($_SESSION['playerHand']);
+            if ($_SESSION['playerHandValue'] > 21){
+
+            }
+            if ($_SESSION['playerHandValue'] < 21){
+                ?>
+                Your score is bellow 21.
+                <br/> <br/>
+                <input type="submit" value = "Hit" name = "action">
+                &nbsp &nbsp &nbsp &nbsp
+                <input type="submit" value = "Pass" name = "action">
+                <?php
+            }
         case 'Pass':
 
     }
 }
+
+function handValue($hand){
+    $value = 0;
+    $count = 0;
+    #var_dump ($hand);
+    for ($x = 0; $x < count($hand); $x++){
+       $card = $hand[$x];
+       if ($card[1] == 1 || $card[1] == 'J' || $card[1] == 'Q' || $card[1] == 'K'){
+           $value = $value + 10;
+       }
+       if ($card[1] == 'A'){
+           if ($count == 0) {
+               $value = $value + 11;
+           }
+           else{
+               $value = $value + 1;
+           }
+       }
+       else{
+           $value = $value + $card[1];
+       }
+    }
+    return $value;
+}
+
+
+
+
+
 function cardText($card){
     #echo $card;
     $output = "";
