@@ -107,13 +107,25 @@ if (isset($_GET['action'])){
 
             <input type="submit" value = "Hit" name = "action">
             &nbsp &nbsp &nbsp &nbsp
-            <input type="submit" vaule = "Pass" name = "action">
+            <input type="submit" value = "Pass" name = "action">
 
             </br >
             <?php
             var_dump($_SESSION);
             break;
         case 'Hit':
+            echo "Your new hand is:  ";
+            $card1 = DEAL();
+            echo (cardText($card1));
+            ?> &nbsp &nbsp <?php
+            array_push($_SESSION['playerHand'], $card1);
+            $intermediate = $_SESSION['playerHand'];
+            echo (cardText($intermediate[0]));
+            ?> &nbsp &nbsp <?php
+            echo (cardText($intermediate[1]));
+            echo "</br >";
+            var_dump($_SESSION);
+        case 'Pass':
 
     }
 }
