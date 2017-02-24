@@ -105,6 +105,7 @@ if (isset($_GET['action'])){
             #var_dump($_SESSION);
             break;
         case 'Hit':
+            echo "</br >";
             echo "Your new hand is:  ";
             $card1 = DEAL();
             array_push($_SESSION['playerHand'], $card1);
@@ -171,13 +172,14 @@ if (isset($_GET['action'])){
             if ($_SESSION['playerHandValue'] < 21){
                 ?>
                 <br/><br/>
-                Your score is bellow 21.
+                Your score is bellow 21. You may Hit or Pass again.
                 <br/> <br/>
                 <input type="submit" value = "Hit" name = "action">
                 &nbsp &nbsp &nbsp &nbsp
                 <input type="submit" value = "Pass" name = "action">
                 <?php
             }
+            break;
         case 'Pass':
             echo "Your Hand is: ";
             for ($x = 0; $x < count($_SESSION['playerHand']); $x++) {
@@ -194,7 +196,7 @@ if (isset($_GET['action'])){
             }
             while (handValue($_SESSION['dealerHand']) < 17){
                 #var_dump ($_SESSION['dealerHand']);
-                echo "<br/ > <br/ > The Dealer will hit";
+                echo "</br > </br > The Dealer will hit";
                 $card1 = DEAL();
                 array_push($_SESSION['dealerHand'], $card1);
                 echo "<br/ > <br/ > The Dealers new hand is:  ";
@@ -205,21 +207,31 @@ if (isset($_GET['action'])){
                 }
             }
             if (handValue($_SESSION['dealerHand']) > 21){
-                if (handValue($_SESSION['playerHand'] < 21)){
+                $playerhandvalue = handValue($_SESSION['playerHand']);
+                if ($playerhandvalue < 21) {
+                    echo "</br > </br >";
                     echo "Congratulations you have won the Game";
                 }
-                if (handValue($_SESSION['playerHand']) > 21){
+                else if (handValue($_SESSION['playerHand']) > 21){
+                    echo "</br > </br >";
                     echo "The Game is a Draw";
                 }
             }
             if (handValue($_SESSION['dealerHand']) < 21){
-                if (handValue($_SESSION['playerHand'] < 21)){
+                $playerhandvalue = handValue($_SESSION['playerHand']);
+                if ($playerhandvalue < 21) {
                     $playerValue = (21 - handValue($_SESSION['playerHand']));
                     $dealerValue = (21 - handValue($_SESSION['dealerHand']));
                     if ($playerValue < $dealerValue){
+                        echo "</br > </br >";
                         echo "Congratulations you have won the Game";
                     }
+                    else if ($playerValue == $dealerValue){
+                        echo "</br > </br >";
+                        echo "The Game is a Draw";
+                    }
                     else{
+                        echo "</br > </br >";
                         echo "The Dealer has won the game";
                     }
                 }
@@ -227,6 +239,7 @@ if (isset($_GET['action'])){
                     echo "The Dealer has won the game.";
                 }
             }
+            break;
     }
 }
 
@@ -316,12 +329,7 @@ function cardText($card){
 }
 
 function DEAL (){
-    #echo $_SESSION['playerHand'];
     $intermediate = $_SESSION['shuffledDeck'];
-    $test = $_SESSION['playerHand'];
-    #echo ($intermediate[$_SESSION['dealNumber']]);
-    #var_dump($intermediate);
-    #$_SESSION['playerHand'] = array_Push($test, $intermediate[$_SESSION['dealNumber']]);
     $_SESSION['dealNumber']++;
     return ($intermediate[$_SESSION['dealNumber']]);
 }
