@@ -82,6 +82,7 @@ if (isset($_GET['action'])){
             $_SESSION['shuffledDeck'] = ($masterlist);
             break;
         case 'Start':
+            session_unset();
             $_SESSION['dealNumber'] = 0;
             $_SESSION['shuffledDeck'] = $masterlist;
             $_SESSION['playerHand'] = [];
